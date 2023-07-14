@@ -40,9 +40,12 @@ pipeline {
           sh 'docker push ddriham/node-hello:latest'
           sh "docker push ddriham/node-hello:${env.BUILD_NUMBER}"
         }
-
-      }
-    }
-
+      }   
+     }
+      stages {
+        stage('Clean the workspace') {
+            steps {
+                cleanWs()
+            }
   }
 }
