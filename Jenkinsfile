@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'docker'
-    }
-
-  }
+  agent any
   stages {
     stage('Check out from github') {
       steps {
