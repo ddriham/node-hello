@@ -34,13 +34,13 @@ pipeline {
 
     stage('push to DockerHub') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+        withCredentials(bindings: [usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'pass', usernameVariable: 'user')]) {
           sh "docker login -u $user -p $pass"
           sh "docker tag ddriham/node-hello:$BUILD_NUMBER ddriham/node-hello:latest"
-          sh "docker push ddriham/node-hello:latest"
+          sh 'docker push ddriham/node-hello:latest'
           sh "docker push ddriham/node-hello:${env.BUILD_NUMBER}"
+        }
 
-}
       }
     }
 
