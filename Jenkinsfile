@@ -38,7 +38,7 @@ pipeline {
           sh "docker login -u $user -p $pass"
           sh "docker tag ddriham/node-hello:$BUILD_NUMBER ddriham/node-hello:latest"
           sh "docker push ddriham/node-hello:latest"
-          sh "docker push ddriham/node-hello:${env,BUILD_NUMBER}
+          sh "docker push ddriham/node-hello:${env,BUILD_NUMBER}"
 
 }
       }
