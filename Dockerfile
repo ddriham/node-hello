@@ -1,6 +1,6 @@
 FROM node:10
 ARG DEVOPS-LEVEL
-MAINTAINER Lidor G
+MAINTAINER David D
 WORKDIR /usr/app
 COPY . .
 RUN npm install & echo "$DEVOPS-LEVEL"
