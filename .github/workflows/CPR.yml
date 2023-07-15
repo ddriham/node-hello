@@ -5,6 +5,15 @@ name: Create a pull request when commit into master branch
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+    inputs:
+      source:
+        description: 'enter the source branch for the pull requst: '
+        required: true
+        default: CPR
+      destination:
+        description: 'enter the destination branch to for the pull requst: '
+        required: true
+        default: develop
  
  
 jobs:
@@ -14,17 +23,21 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-     
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v5
-        with:
-          signoff: false
-          branch: master
-          title: '[Example] Update report'
-          body: |
-            this is a multiline string 
-            use to check if i get this action right
+      - name: Create a pull request when using variables from the subscriber 
+        run: |
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/ddriham/node-hello/pulls \
+          -d '{"title":"Amazing new feature","body":"Please pull these awesome changes in!","head":"${{ github.event.inputs.source }}","base":"${{ github.event.inputs.destination }}"}'
+  
+  
+  
+      
+  
+
             
           
 
