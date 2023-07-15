@@ -1,0 +1,31 @@
+
+
+name: Create a pull request when commit into master branch
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+ 
+ 
+jobs:
+
+  createPullRequest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+     
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          signoff: false
+          branch: master
+          title: '[Example] Update report'
+          body: |
+            this is a multiline string 
+            use to check if i get this action right
+            
+          
+
+          
